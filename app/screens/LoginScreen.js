@@ -1,45 +1,49 @@
 import React from "react";
 import { StyleSheet, Image } from "react-native";
-import AppButton from "../components/AppButton";
-import AppTextInput from "../components/AppTextInput";
-import Screen from "../components/Screen";
+import * as Yup from "yup";
 
-import { Formik } from "formik";
+import Screen from "../components/Screen";
+import { AppForm, AppFormField, SubmitButton } from "../components/forms";
+import colors from "../config/colors";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required().email().label("Email"),
+  password: Yup.string().required().min(4).label("Password"),
+});
 
 function LoginScreen(props) {
   return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-      <Formik
+      <AppForm
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit }) => (
-          <>
-            <AppTextInput
-              style={styles.text}
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              icon="at"
-              onChangeText={handleChange("email")}
-              placeholder="Email"
-              textContentType="emailAddress"
-            />
-            <AppTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              onChangeText={handleChange("password")}
-              placeholder="Password"
-              secureTextEntry
-              textContentType="password"
-            />
-            <AppButton title="Login" color="primary" onPress={handleSubmit} />
-          </>
-        )}
-      </Formik>
+        <AppFormField
+          name="email"
+          style={styles.text}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          icon="at"
+          placeholder="Email"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          name="password"
+          style={styles.text}
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
+        <SubmitButton
+         title="LOGIN" />
+      </AppForm>
     </Screen>
   );
 }
@@ -47,13 +51,14 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: colors.white,
   },
   logo: {
     width: 200,
     height: 70,
+    marginBottom: 20,
     alignSelf: "center",
     marginTop: 50,
-    marginBottom: 20,
   },
 });
 

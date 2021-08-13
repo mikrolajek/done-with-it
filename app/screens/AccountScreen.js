@@ -9,14 +9,14 @@ import colors from "../config/colors";
 
 const menuItems = [
   {
-    title: "My listings",
+    title: "Moje ankiety",
     icon: {
       name: "format-list-bulleted",
       backgroundColor: colors.secondary,
     },
   },
   {
-    title: "My messages",
+    title: "Moje wiadomości",
     icon: {
       name: "email",
       backgroundColor: colors.primary,
@@ -54,7 +54,7 @@ function AccountScreen(props) {
       </View>
       <View>
         <ListItem
-          title="Log Out"
+          title="Wyloguj"
           IconComponent={<Icon name="logout" backgroundColor={colors.brown} />}
         />
       </View>

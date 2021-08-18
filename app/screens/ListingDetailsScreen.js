@@ -5,13 +5,14 @@ import AppText from "../components/AppText";
 import colors from "../config/colors";
 import ListItem from "../components/ListItem";
 
-function ListingDetailsScreen(props) {
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
   return (
     <View>
-      <Image style={styles.image} source={require("../assets/sample.jpg")} />
+      <Image style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
-        <AppText style={styles.title}>Ankieta 1</AppText>
-        <AppText style={styles.subTitle}>Data</AppText>
+        <AppText style={styles.title}>{listing.title}</AppText>
+        <AppText style={styles.subTitle}>{listing.subTitle}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/me.jpg")}
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   subTitle: {
-    color: colors.secondary,
+    color: colors.primary,
     fontWeight: "bold",
     fontSize: 20,
     marginVertical: 10,

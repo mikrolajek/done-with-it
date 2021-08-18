@@ -11,7 +11,7 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppTextInput from "../components/AppTextInput";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
 
   return (
@@ -40,12 +40,12 @@ function WelcomeScreen(props) {
       <View style={styles.buttonsContainer}>
         <AppButton
           title="LOGIN"
-          onPress={() => alert("Login")}
+          onPress={() => navigation.navigate("Login")}
           color="primary"
         ></AppButton>
         <AppButton
           title="REGISTER"
-          onPress={() => alert("Register")}
+          onPress={() => navigation.navigate("Register")}
           color="secondary"
         ></AppButton>
       </View>

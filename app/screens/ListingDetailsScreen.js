@@ -12,7 +12,7 @@ function ListingDetailsScreen({ route }) {
       <Image style={styles.image} source={listing.image} />
       <View style={styles.detailsContainer}>
         <AppText style={styles.title}>{listing.title}</AppText>
-        <AppText style={styles.subTitle}>{listing.subTitle}</AppText>
+        <AppText style={styles.subTitle}>{listing.price}</AppText>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/me.jpg")}

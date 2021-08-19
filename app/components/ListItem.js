@@ -10,7 +10,7 @@ import colors from "../config/colors";
 import AppText from "./AppText";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function ListItem({
   title,
@@ -27,10 +27,16 @@ function ListItem({
           {IconComponent}
           {image && <Image style={styles.image} source={image} />}
           <View style={styles.detailsContainer}>
-            <AppText style={styles.title} numberofLines={1}>{title}</AppText>
-            {subTitle && <AppText style={styles.subTitle} numberOfLines={2}>{subTitle}</AppText>}
+            <AppText style={styles.title} numberofLines={1}>
+              {title}
+            </AppText>
+            {subTitle && (
+              <AppText style={styles.subTitle} numberOfLines={2}>
+                {subTitle}
+              </AppText>
+            )}
           </View>
-          <MaterialCommunityIcons name='chevron-right' size={20}/>
+          <MaterialCommunityIcons name="chevron-right" size={20} />
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -39,7 +45,7 @@ function ListItem({
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
     flexDirection: "row",
     padding: 15,
     backgroundColor: colors.white, // Bez tego tło kafelków jest przezroczyste!
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
   },
-  subTitle: {
+  price: {
     color: colors.primary,
   },
 });

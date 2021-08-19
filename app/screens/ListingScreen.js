@@ -1,52 +1,38 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
+
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
-const listings = [
-  {
-    id: 1,
-    title: "Apteka DOZ",
-    subTitle: "10.10.10",
-    image: require("../assets/sample4.jpg"),
-  },
-  {
-    id: 2,
-    title: "Apteka Superpharm",
-    subTitle: "10.10.11",
-    image: require("../assets/sample5.jpg"),
-  },
-  {
-    id: 3,
-    title: "Sklep SFD",
-    subTitle: "10.10.11",
-    image: require("../assets/sample3.jpg"),
-  },
-  {
-    id: 4,
-    title: "Apteka DOZ",
-    subTitle: "10.10.10",
-    image: require("../assets/sample4.jpg"),
-  },
-  {
-    id: 5,
-    title: "Sklep SFD",
-    subTitle: "10.10.11",
-    image: require("../assets/sample3.jpg"),
-  },
-  {
-    id: 6,
-    title: "Apteka DOZ",
-    subTitle: "10.10.10",
-    image: require("../assets/sample5.jpg"),
-  },
-];
+import listingsApi from "../api/listings";
+import AppText from "../components/AppText";
+import AppButton from "../components/AppButton";
 
 function ListingScreen({ navigation }) {
+  const [listings, setListings] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
+  const loadListings = async () => {
+    const response = await listingsApi.getListings();
+    if (!response.ok) return setError(true); // Wyrzuca tu error!
+
+    setError(false);
+    setListings(response.data);
+  };
+
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Nie mozna wczytac!</AppText>
+          <AppButton color="primary" title="Ponow" onPress={loadListings} />
+        </>
+      )}
       <FlatList
         showsVerticalScrollIndicator={false}
         data={listings}
@@ -54,8 +40,8 @@ function ListingScreen({ navigation }) {
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            subTitle={"Data dodania: " + item.subTitle}
-            image={item.image}
+            subTitle={"Data dodania: " + item.price}
+            imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}

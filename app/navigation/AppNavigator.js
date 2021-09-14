@@ -18,7 +18,11 @@ const AppNavigator = () => (
       component={FeedNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={size} />
+          <MaterialCommunityIcons
+            name="text-box-search-outline"
+            color={color}
+            size={size}
+          />
         ),
       }}
     />

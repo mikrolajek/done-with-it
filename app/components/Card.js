@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     marginBottom: 20,
     overflow: "hidden",
-    elevation: 3,
+    elevation: 1,
   },
   image: {
     width: "100%",
-    height: 150,
+    height: 70,
   },
   detailsContainer: {
     padding: 20,
